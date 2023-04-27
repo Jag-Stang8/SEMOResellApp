@@ -1,0 +1,68 @@
+.login{
+    margin: auto;
+    width: 40%;
+    height: 400px;
+    text-align: center;
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #da1a32;
+}
+
+.form-items {
+    display: flex;
+    flex-direction:column;
+    margin: 30px 0;
+}
+
+.form-items input{
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+button[type="submit"]{
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #ccc;
+    width: 100px;
+}
+button[type="submit"]:hover{
+    background-color: #da1a32;
+}
+
+.loginH {
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.title{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 750px;
+    margin: 0;
+    padding: 0;
+}
+
+.buttons a{
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
+.registration{
+    margin: auto;
+    width: 40%;
+    height: 500px;
+    text-align: center;
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #da1a32;
+}
