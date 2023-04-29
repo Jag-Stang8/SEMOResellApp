@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>List an Item</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="listanitem.css">
+    </head>
+
+    <body>
+
+        <!-- Navigation Panel -->
+    <iframe src="navpanel.html" width="100%" height="100" frameborder="0" scrolling="no"></iframe>
+
+    <div>
+        <h1>List an Item</h1>
+    </div>
+
+    <!-- Form for Listing an Item -->
+    <form class="listitem" method="POST" action="#">
+        
+        <div class="form-items">
+            <input type="text" id="title" require placeholder="Enter a Title for your listing">
+        </div>
+
+        <div class="form-items">
+            <textarea id="description" name="description" rows="6" required placeholder="Enter a short description for your item"></textarea>
+        </div>
+
+        <div class="form-items">
+            <input type="number" id="price" name="price" step="0.01" required placeholder="Enter Price">
+        </div>
+
+        <div class="form-items">
+            <select name="category" id="category[]" multiple required>
+                <option>Electronics</option>
+                <option>Textbooks</option>
+                <option>Furniture</option>
+                <option>Men's Clothing</option>
+                <option>Women's Clothing</option>
+                <option>Sporting and Outdoors</option>
+                <option>Kitchen</option>
+                <option>Music</option>
+                <option>Food</option>
+                <option>Miscellaneous</option>
+            </select>
+        </div>
+
+        <div class="form-items">
+            <label for="photo">Upload a Photo</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+        </div>
+
+        <button type="submit">Post Listing</button>
+
+    </form>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!-- Seller Name and Product Name pulled from DB -->
+
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Leave a Review</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+     <!-- Navigation Panel -->
+     <iframe src="navpanel.html" width="100%" height="100" frameborder="0" scrolling="no"></iframe>
+
+<section class="review-section">
+
+     <!-- Review Form -->
+     <form class="review-form" method="POST" action="#">
+        <h1 style="text-decoration: underline;">Leave a Review</h1>
+
+        <!-- Headings -->
+        <h2>SellerName</h2>
+        <h2>ProductName</h2>
+
+        <!-- Written Review box -->
+        <textarea id="write-review" name="write-review" rows="10" cols="50" maxlength="300" required placeholder="Write your Review Here (300 Characters Max)"></textarea>
+
+        <!-- Categories -->
+        <div class="checkboxes">
+                <input type="checkbox">Good Communication
+                <input type="checkbox">Product as Expected
+                <input type="checkbox">Honest
+                <input type="checkbox">Friendly
+                <input type="checkbox">Fast Shipping
+        </div>
+
+        <button class="submit" type="submit">Submit Review</button>
+
+</form>
+</section>
+
+<style>
+        .review-section{
+             border: 1px solid black;   
+             border-radius: 15px;
+             padding: 20px;
+             height: 150%;
+             width: 50%;
+             margin: auto;
+        }
+        .checkboxes{
+                flex-direction: column;
+        }
+        .submit{
+                padding: 10px 20px;
+                margin-top: 15px;
+        }
+</style>
+
+</body>
+</html>
