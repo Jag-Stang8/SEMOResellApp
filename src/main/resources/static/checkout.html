@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cart</title>
+        <title>Checkout</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
@@ -9,7 +9,128 @@
     <body>
          <!-- Navigation Panel -->
         <iframe src="navpanel.html" width="100%" height="100" frameborder="0" scrolling="no"></iframe>
+        
+        <h1 style="text-decoration: underline;">Checkout</h1>
 
+        <section class="checkout">
+            
+
+            <!-- Checkout Form (With Inital Input Pattern Matching) -->
+            <form class="checkout-form" method="POST" action="#">
+
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" required pattern="[A-Za-z ]+"><br>
+
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" required pattern="[A-Za-z ]+"><br>
+
+                <label for="address">Billing Address:</label>
+                <input type="text" id="address" name="address" required><br>
+
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required pattern="[A-Za-z ]+"><br>
+
+                <label for="state">Select State:</label>
+                <select id="state" name="state" required>
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                </select><br>
+
+                <label for="zip">Zip Code:</label>
+                <input type="text" id="zip" name="zip" required pattern="\d{5}"><br>
+
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br>
+
+                <label for="cardno">Card Number (Do not leave spaces or use hyphens):</label>
+                <input type="text" id="cardno" name="cardno" pattern="[0-9]{15,16}" required><br>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" required pattern="\d{3-4}"><br>
+
+                <label for="exp">Expiration Date (mm/yy):</label>
+                <input type="text" id="exp" name="exp" required pattern="(0[1-9]|1[0-2])\/(2[3-9])"><br>
+
+                <input type="submit" value="Place Order">
+            </form>
+        </section>
+
+<style>
+    .checkout{
+        display: flex;
+        flex-direction: column;
+        font-size: 20px;
+    }
+    input[type="text"]{
+        margin: 10px;
+        display: flex;
+        height: 20px;
+        width: 20%;
+        border-radius: 5px;
+        }
+    select{
+        margin: 10px;
+        display: flex;
+        margin-left: 100px;
+    }
+    input[type="submit"]{
+        display: block;
+        margin-left: 80px;
+    }
+    label{
+        display: inline-block;
+    }
+    
+</style>
 
     </body>
 </html>
