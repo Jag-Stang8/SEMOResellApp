@@ -1,30 +1,47 @@
 package com.redacted.semoresellapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Order {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long customerId;
-    private Long listingId;
-    private LocalDate orderDate;
 
-    public Order(Long id, Long customerId, Long listingId, LocalDate orderDate) {
-        this.id = id;
-        this.customerId = customerId;
-        this.listingId = listingId;
-        this.orderDate = orderDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    private LocalDateTime createdAt;
+
+    // Constructors, getters, and setters
+    // ...
+
+    public Order(Customer customer, List<OrderItem> orderItems) {
+        this.customer = customer;
+        this.orderItems = orderItems;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Order() {
 
+    }
+
+    public double getTotalPrice() {
+        int total = 0;
+        for(OrderItem o : orderItems){
+            total += o.getTotalPrice();
+        }
+
+        return total;
     }
 
     public Long getId() {
@@ -35,27 +52,27 @@ public class Order {
         this.id = id;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Long getListingId() {
-        return listingId;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setListingId(Long listingId) {
-        this.listingId = listingId;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
-    public LocalDate getOrderDate() {
-        return orderDate;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
