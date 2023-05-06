@@ -1,14 +1,21 @@
 package com.redacted.semoresellapp.repository;
 
 import com.redacted.semoresellapp.model.Listing;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.redacted.semoresellapp.model.User;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ListingRepository extends JpaRepository<Listing, Long> {
-    List<Listing> findByTitleContainingIgnoreCase(String title);
-    List<Listing> findBySellerContainingIgnoreCase(String seller);
-    List<Listing> findByPriceLessThan(Double price);
+@Repository
+public interface ListingRepository extends CrudRepository<Listing, Long> {
+    List<Listing> findBySeller(User seller);
 
-    //add other queries here
+    List<Listing> findByTitleContainingIgnoreCase(String title);
+
+    List<Listing> findByPriceLessThan(double price);
+
+    List<Listing> findByPriceGreaterThan(double price);
+
+    List<Listing> findByPriceBetween(double minPrice, double maxPrice);
 }

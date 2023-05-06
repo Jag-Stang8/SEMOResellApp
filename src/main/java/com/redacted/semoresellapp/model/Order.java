@@ -2,77 +2,100 @@ package com.redacted.semoresellapp.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Order {
+    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "price")
+    private double price;
+
+    @Column(name = "status")
+    private String status;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "buyer_id", nullable = false)
+    private User buyer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "listing_id", nullable = false)
+    private Listing listing;
 
-    private LocalDateTime createdAt;
 
-    // Constructors, getters, and setters
-    // ...
+    //Constructors
+    public Order() {}
 
-    public Order(Customer customer, List<OrderItem> orderItems) {
-        this.customer = customer;
-        this.orderItems = orderItems;
-        this.createdAt = LocalDateTime.now();
+    public Order(int quantity, double price, String status, User buyer, Listing listing) {
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+        this.buyer = buyer;
+        this.listing = listing;
     }
 
-    public Order() {
 
+    //Methods
+
+
+    //Getters and Setters
+    public int getQuantity() {
+        return quantity;
     }
 
-    public double getTotalPrice() {
-        int total = 0;
-        for(OrderItem o : orderItems){
-            total += o.getTotalPrice();
-        }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-        return total;
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getBuyer() {
+        return buyer;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Listing getListing() {
+        return listing;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+
+    //To-String, Equals, and HashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return quantity == order.quantity && Double.compare(order.price, price) == 0 && Objects.equals(id, order.id) && Objects.equals(status, order.status) && Objects.equals(buyer, order.buyer) && Objects.equals(listing, order.listing);
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, quantity, price, status, buyer, listing);
     }
 }

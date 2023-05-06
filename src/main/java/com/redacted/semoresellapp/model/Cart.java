@@ -2,90 +2,91 @@ package com.redacted.semoresellapp.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Table(name = "cart_table")
 public class Cart {
+    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartItems = new ArrayList<>();
+    @Column(name = "quantity")
+    private int quantity;
 
-    private double totalPrice = 0;
+    @Column(name = "status")
+    private String status;
 
-    private Integer totalQuantity = 0;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    // Constructor, getters, and setters
-    // ...
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "cart_listings")
+    private List<Listing> items;
 
-    public void addCartItem(Listing listing) {
-        for (CartItem item : cartItems) {
-            if (item.getListing().getListingID().equals(listing.getListingID())) {
-                item.setQuantity(item.getQuantity() + 1);
-                updateCart();
-                return;
-            }
-        }
-        CartItem newItem = new CartItem(listing, this);
-        cartItems.add(newItem);
-        updateCart();
+
+    //Constructors
+    public Cart() {}
+
+    public Cart(int quantity, String status, User user, List<Listing> items) {
+        this.quantity = quantity;
+        this.status = status;
+        this.user = user;
+        this.items = items;
     }
 
-    public void removeCartItem(CartItem item) {
-        cartItems.remove(item);
-        updateCart();
+
+    //Methods
+
+
+
+    //Getters and Setters
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void updateCart() {
-        totalPrice = 0;
-        totalQuantity = 0;
-        for (CartItem item : cartItems) {
-            totalPrice = totalPrice += item.getPrice();
-            totalQuantity += item.getQuantity();
-        }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public void clearCart() {
-        cartItems.clear();
-        updateCart();
+    public String getStatus() {
+        return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getUser() {
+        return user;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public List<Listing> getItems() {
+        return items;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public void setItems(List<Listing> items) {
+        this.items = items;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    //To-String, Equals, and HashCode
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return quantity == cart.quantity && Objects.equals(id, cart.id) && Objects.equals(status, cart.status) && Objects.equals(user, cart.user) && Objects.equals(items, cart.items);
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Integer getTotalQuantity() {
-        return totalQuantity;
-    }
-
-    public void setTotalQuantity(Integer totalQuantity) {
-        this.totalQuantity = totalQuantity;
-    }
-
-    public CartItem getItemByListing(Listing listing) {
-        return cartItems.get(cartItems.indexOf(listing));
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, quantity, status, user, items);
     }
 }

@@ -1,58 +1,70 @@
 package com.redacted.semoresellapp.service;
 
-import com.redacted.semoresellapp.model.*;
-import com.redacted.semoresellapp.repository.ListingRepository;
-import com.redacted.semoresellapp.repository.OrderRepository;
+import com.redacted.semoresellapp.model.Cart;
+import com.redacted.semoresellapp.model.Listing;
+import com.redacted.semoresellapp.repository.CartRepository;
+import exception.CartNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class CartService {
-    private ListingRepository listingRepository;
-    private OrderRepository orderRepository;
+    @Autowired
+    private final CartRepository cartRepository;
 
-    public CartService(ListingRepository listingRepository, OrderRepository orderRepository) {
-        this.listingRepository = listingRepository;
-        this.orderRepository = orderRepository;
+    public CartService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
     }
 
-    public void addItemToCart(Cart cart, Listing listing, int quantity) {
-        CartItem cartItem = cart.getItemByListing(listing);
-        if (cartItem != null) {
-            cartItem.setQuantity(cartItem.getQuantity() + quantity);
-        } else {
-            cart.getCartItems().add(new CartItem(listing, quantity));
-        }
+    public List<Cart> getAllCarts() {
+        return (List<Cart>) cartRepository.findAll();
     }
 
-    public void updateCartItemQuantity(Cart cart, Listing listing, int quantity) {
-        CartItem cartItem = cart.getItemByListing(listing);
-        if (cartItem != null) {
-            cartItem.setQuantity(quantity);
-        }
+    public Cart getCartById(Long id) {
+        Optional<Cart> optionalCart = cartRepository.findById(id);
+        if(optionalCart.isPresent())
+            return optionalCart.get();
+        else
+            throw new CartNotFoundException("No Listing with id: " + id + " found");
+    }
+
+    public Cart createCart(Cart cart) {
+        return cartRepository.save(cart);
+    }
+
+    public Cart updateCart(Long id, Cart updatedCart) {
+        Cart cart = getCartById(id);
+        cart.setQuantity(updatedCart.getQuantity());
+        cart.setStatus(updatedCart.getStatus());
+        cart.setItems(updatedCart.getItems());
+
+        return cartRepository.save(cart);
+    }
+
+    public void addItemToCart(Cart cart, Listing listing) {
+        List<Listing> items = cart.getItems();
+        items.add(listing);
+        cart.setItems(items);
+        cartRepository.save(cart);
     }
 
     public void removeItemFromCart(Cart cart, Listing listing) {
-        CartItem cartItem = cart.getItemByListing(listing);
-        if (cartItem != null) {
-            cart.getCartItems().remove(cartItem);
-        }
+        List<Listing> items = cart.getItems();
+        items.remove(listing);
+        cart.setItems(items);
+        cartRepository.save(cart);
     }
 
-    public void checkoutCart(Cart cart, Customer customer) {
-        List<OrderItem> orderItems = cart.getCartItems().stream()
-                .map(item -> new OrderItem(item.getListing(), item.getQuantity(), item.getPrice()))
-                .collect(Collectors.toList());
+    public void clearCart(Cart cart) {
+        cart.setItems(new ArrayList<>());
+        cartRepository.save(cart);
+    }
 
-        Order order = new Order(customer, orderItems);
-        for (CartItem cartItem : cart.getCartItems()) {
-            Listing listing = cartItem.getListing();
-            listingRepository.save(listing);
-        }
-        cart.getCartItems().clear();
-        orderRepository.save(order);
+    public void deleteCart(Long id) {
+        cartRepository.deleteById(id);
     }
 }

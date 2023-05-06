@@ -1,44 +1,80 @@
 package com.redacted.semoresellapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
-/*
- * This class implements the Message entity with the attributes:
- * messageID, subject, and content
- * as well as the appropriate getters and setters
- */
+@Table(name = "message_table")
 public class Message {
+    //Attributes
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long messageID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private String subject;
+    @Column(name = "content")
     private String content;
 
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id", nullable = false)
+    private User sender;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_id", nullable = false)
+    private User receiver;
+
+
+    //Constructors
     public Message() {}
 
-    public Message(String subject, String content) {
-        this.subject = subject;
+    public Message(String content, LocalDateTime timestamp, User sender, User receiver) {
         this.content = content;
+        this.timestamp = timestamp;
+        this.sender = sender;
+        this.receiver = receiver;
     }
 
-    public void setMessageID(Long messageID) {
-        this.messageID = messageID;
-    }
 
-    public Long getMessageID() {
-        return messageID;
+    //Methods
+
+
+
+    //Getters and Setters
+    public Long getId() {
+        return id;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    //To-String, Equals, and HashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return Objects.equals(id, message.id) && Objects.equals(content, message.content) && Objects.equals(timestamp, message.timestamp) && Objects.equals(sender, message.sender) && Objects.equals(receiver, message.receiver);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, content, timestamp, sender, receiver);
     }
 }

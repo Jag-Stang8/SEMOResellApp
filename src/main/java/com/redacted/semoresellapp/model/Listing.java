@@ -1,59 +1,96 @@
 package com.redacted.semoresellapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-import java.util.List;
+import jakarta.persistence.*;
 
 @Entity
-/*
- * This class implements the Listing entity with the attributes:
- * listingID, itemName, itemDesc, price, and categoriesList
- * as well as the appropriate getters and setters
- */
+@Table(name = "listing_table")
 public class Listing {
+    //Attributes
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long listingID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private String itemName;
-    private String itemDesc;
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "desc")
+    private String desc;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "price")
     private double price;
-    private List<Categories> categoriesList;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id", nullable = false)
+    private User seller;
+
+
+    //Constructors
     public Listing() {}
 
-
-    public Listing(String itemName, String itemDesc, double price, List<Categories> categoriesList) {
-        this.itemName = itemName;
-        this.itemDesc = itemDesc;
+    public Listing(String title, String desc, String image, double price, User seller) {
+        this.title = title;
+        this.desc = desc;
+        this.image = image;
         this.price = price;
-        this.categoriesList = categoriesList;
+        this.seller = seller;
     }
 
-    public void setListingID(Long listingID) {
-        this.listingID = listingID;
+    //Methods
+
+
+    //Getters and Setters
+    public String getTitle() {
+        return title;
     }
 
-    public Long getListingID() {
-        return listingID;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getDesc() {
+        return desc;
     }
 
-    public String getItemDesc() {
-        return itemDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public List<Categories> getCategoriesList() {
-        return categoriesList;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public User getSeller() {
+        return this.seller;
+    }
+
+
+    //To-String
+
+    @Override
+    public String toString() {
+        return "Listing{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", desc='" + desc + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", seller=" + seller +
+                '}';
     }
 }
+
