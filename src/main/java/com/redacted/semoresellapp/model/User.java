@@ -10,7 +10,7 @@ import java.util.Objects;
  * as well as the appropriate getters and setters
  */
 @Entity
-@Table(name = "customer_table")
+@Table(name = "user_table")
 public class User {
     //Attributes
     @Id

@@ -23,18 +23,23 @@ public class Review {
     private Listing listing;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "buyer_id", nullable = false)
+    private User buyer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id", nullable = false)
+    private User seller;
 
 
     //Constructors
     public Review() {}
 
-    public Review(int rating, String content, Listing listing, User user) {
+    public Review(int rating, String content, Listing listing, User buyer, User seller) {
         this.rating = rating;
         this.content = content;
         this.listing = listing;
-        this.user = user;
+        this.buyer = buyer;
+        this.seller = seller;
     }
 
 
@@ -68,7 +73,27 @@ public class Review {
     }
 
     public User getUser() {
-        return user;
+        return buyer;
+    }
+
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
+
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
     }
 
 
@@ -78,11 +103,11 @@ public class Review {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return rating == review.rating && Objects.equals(id, review.id) && Objects.equals(content, review.content) && Objects.equals(listing, review.listing) && Objects.equals(user, review.user);
+        return rating == review.rating && Objects.equals(id, review.id) && Objects.equals(content, review.content) && Objects.equals(listing, review.listing) && Objects.equals(buyer, review.buyer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, rating, content, listing, user);
+        return Objects.hash(id, rating, content, listing, buyer);
     }
 }

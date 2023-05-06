@@ -25,17 +25,17 @@ public class Message {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id", nullable = false)
-    private User receiver;
+    private User recipient;
 
 
     //Constructors
     public Message() {}
 
-    public Message(String content, LocalDateTime timestamp, User sender, User receiver) {
+    public Message(String content, LocalDateTime timestamp, User sender, User recipient) {
         this.content = content;
         this.timestamp = timestamp;
         this.sender = sender;
-        this.receiver = receiver;
+        this.recipient = recipient;
     }
 
 
@@ -60,8 +60,8 @@ public class Message {
         return sender;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public User getRecipient() {
+        return recipient;
     }
 
     //To-String, Equals, and HashCode
@@ -70,11 +70,11 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return Objects.equals(id, message.id) && Objects.equals(content, message.content) && Objects.equals(timestamp, message.timestamp) && Objects.equals(sender, message.sender) && Objects.equals(receiver, message.receiver);
+        return Objects.equals(id, message.id) && Objects.equals(content, message.content) && Objects.equals(timestamp, message.timestamp) && Objects.equals(sender, message.sender) && Objects.equals(recipient, message.recipient);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, content, timestamp, sender, receiver);
+        return Objects.hash(id, content, timestamp, sender, recipient);
     }
 }

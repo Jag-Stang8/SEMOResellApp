@@ -14,8 +14,4 @@ public interface MessageRepository extends CrudRepository<Message, Long> {
     List<Message> findBySender(User sender);
 
     List<Message> findByRecipient(User recipient);
-
-    List<Message> findByListing(Listing listing);
-
-    List<Message> findByOrder(Order order);
 }

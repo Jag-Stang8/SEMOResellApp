@@ -15,6 +15,4 @@ public interface ReviewRepository extends CrudRepository<Review, Long> {
     List<Review> findBySeller(User seller);
 
     List<Review> findByBuyer(User buyer);
-
-    double avgRatingBySeller(User seller);
 }

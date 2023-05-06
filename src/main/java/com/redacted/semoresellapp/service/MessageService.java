@@ -2,7 +2,7 @@ package com.redacted.semoresellapp.service;
 
 import com.redacted.semoresellapp.model.Message;
 import com.redacted.semoresellapp.repository.MessageRepository;
-import exception.MessageNotFoundException;
+import com.redacted.semoresellapp.exception.MessageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

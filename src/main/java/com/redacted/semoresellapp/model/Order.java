@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "order_table")
 public class Order {
     //Attributes
     @Id
@@ -28,6 +29,10 @@ public class Order {
     private User buyer;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id", nullable = false)
+    private User seller;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "listing_id", nullable = false)
     private Listing listing;
 
@@ -35,11 +40,12 @@ public class Order {
     //Constructors
     public Order() {}
 
-    public Order(int quantity, double price, String status, User buyer, Listing listing) {
+    public Order(int quantity, double price, String status, User buyer, User seller, Listing listing) {
         this.quantity = quantity;
         this.price = price;
         this.status = status;
         this.buyer = buyer;
+        this.seller = seller;
         this.listing = listing;
     }
 
@@ -78,6 +84,14 @@ public class Order {
 
     public User getBuyer() {
         return buyer;
+    }
+
+    public User getSeller() {
+        return this.seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
     }
 
     public Listing getListing() {

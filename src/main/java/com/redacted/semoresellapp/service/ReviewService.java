@@ -4,8 +4,7 @@ import com.redacted.semoresellapp.model.Listing;
 import com.redacted.semoresellapp.model.Review;
 import com.redacted.semoresellapp.repository.ListingRepository;
 import com.redacted.semoresellapp.repository.ReviewRepository;
-import exception.ReviewNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+import com.redacted.semoresellapp.exception.ReviewNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +43,8 @@ public class ReviewService {
         Review review = getReviewById(id);
         review.setRating(updatedReview.getRating());
         review.setContent(updatedReview.getContent());
+        review.setBuyer(updatedReview.getBuyer());
+        review.setSeller(updatedReview.getSeller());
 
         Listing listing = review.getListing();
         listing.setTitle(updatedReview.getListing().getTitle());

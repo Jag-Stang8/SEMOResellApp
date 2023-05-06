@@ -1,4 +1,4 @@
-package exception;
+package com.redacted.semoresellapp.exception;
 
 public class MessageNotFoundException extends RuntimeException{
     public MessageNotFoundException(String message) {

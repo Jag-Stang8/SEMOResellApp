@@ -4,7 +4,7 @@ import com.redacted.semoresellapp.model.Listing;
 import com.redacted.semoresellapp.model.Order;
 import com.redacted.semoresellapp.repository.ListingRepository;
 import com.redacted.semoresellapp.repository.OrderRepository;
-import exception.OrderNotFoundException;
+import com.redacted.semoresellapp.exception.OrderNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +44,7 @@ public class OrderService {
         order.setQuantity(updatedOrder.getQuantity());
         order.setPrice(updatedOrder.getPrice());
         order.setStatus(updatedOrder.getStatus());
+        order.setSeller(updatedOrder.getSeller());
 
         Listing listing = order.getListing();
         listing.setTitle(updatedOrder.getListing().getTitle());
