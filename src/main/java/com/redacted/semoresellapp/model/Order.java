@@ -2,9 +2,6 @@ package com.redacted.semoresellapp.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -36,17 +33,22 @@ public class Order {
     @JoinColumn(name = "listing_id", nullable = false)
     private Listing listing;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "checkout_id", nullable = false)
+    private Checkout checkout;
+
 
     //Constructors
     public Order() {}
 
-    public Order(int quantity, double price, String status, User buyer, User seller, Listing listing) {
+    public Order(int quantity, double price, String status, User buyer, User seller, Listing listing, Checkout checkout) {
         this.quantity = quantity;
         this.price = price;
         this.status = status;
         this.buyer = buyer;
         this.seller = seller;
         this.listing = listing;
+        this.checkout = checkout;
     }
 
 
@@ -98,18 +100,40 @@ public class Order {
         return listing;
     }
 
+    public Checkout getCheckout() {
+        return checkout;
+    }
+
+    public void setCheckout(Checkout checkout) {
+        this.checkout = checkout;
+    }
+
 
     //To-String, Equals, and HashCode
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                ", buyer=" + buyer +
+                ", seller=" + seller +
+                ", listing=" + listing +
+                ", checkout=" + checkout +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return quantity == order.quantity && Double.compare(order.price, price) == 0 && Objects.equals(id, order.id) && Objects.equals(status, order.status) && Objects.equals(buyer, order.buyer) && Objects.equals(listing, order.listing);
+        return quantity == order.quantity && Double.compare(order.price, price) == 0 && Objects.equals(id, order.id) && Objects.equals(status, order.status) && Objects.equals(buyer, order.buyer) && Objects.equals(seller, order.seller) && Objects.equals(listing, order.listing) && Objects.equals(checkout, order.checkout);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quantity, price, status, buyer, listing);
+        return Objects.hash(id, quantity, price, status, buyer, seller, listing, checkout);
     }
 }

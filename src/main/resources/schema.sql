@@ -16,6 +16,16 @@ CREATE TABLE IF NOT EXISTS listing_table (
     FOREIGN KEY (seller_id) REFERENCES user_table (id)
 );
 
+-- Create Checkout table
+CREATE TABLE IF NOT EXISTS checkout_table (
+    id NUMBER(10) PRIMARY KEY,
+    total_price NUMBER(10,2) NOT NULL,
+    order_date TIMESTAMP NOT NULL,
+    buyer_id NUMBER(10) NOT NULL,
+    items NUMBER(10) NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES user_table (id)
+);
+
 -- Create Order table
 CREATE TABLE IF NOT EXISTS order_table (
     id NUMBER(10) PRIMARY KEY,
@@ -25,9 +35,11 @@ CREATE TABLE IF NOT EXISTS order_table (
     seller_id NUMBER(10) NOT NULL,
     buyer_id NUMBER(10) NOT NULL,
     listing_id NUMBER(10) NOT NULL,
+    checkout_id NUMBER(10) NOT NULL,
     FOREIGN KEY (buyer_id) REFERENCES user_table (id),
     FOREIGN KEY (seller_id) REFERENCES user_table (id),
-    FOREIGN KEY (listing_id) REFERENCES listing_table (id)
+    FOREIGN KEY (listing_id) REFERENCES listing_table (id),
+    FOREIGN KEY (checkout_id) REFERENCES checkout_table (id)
 );
 
 -- Create Review table
@@ -63,17 +75,6 @@ CREATE TABLE IF NOT EXISTS cart_table (
     cart_listings NUMBER(10) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user_table (id),
     FOREIGN KEY (cart_listings) REFERENCES listing_table (id)
-);
-
--- Create Checkout table
-CREATE TABLE IF NOT EXISTS checkout_table (
-    id NUMBER(10) PRIMARY KEY,
-    total_price NUMBER(10,2) NOT NULL,
-    order_date TIMESTAMP NOT NULL,
-    buyer_id NUMBER(10) NOT NULL,
-    items NUMBER(10) NOT NULL,
-    FOREIGN KEY (items) REFERENCES order_table (id),
-    FOREIGN KEY (buyer_id) REFERENCES user_table (id)
 );
 
 -- Create CartListing table
