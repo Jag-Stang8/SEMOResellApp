@@ -21,11 +21,10 @@ public class Checkout {
     private Date orderDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "checkout_order", joinColumns = @JoinColumn(name = "checkout_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+    @JoinColumn(name = "buyer_id")
     private User buyer;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "items", nullable = false)
+    @OneToMany(mappedBy = "checkout", fetch = FetchType.LAZY)
     private List<Order> items;
 
 

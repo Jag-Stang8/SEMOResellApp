@@ -1,8 +1,10 @@
 package com.redacted.semoresellapp.service;
 
 import com.redacted.semoresellapp.model.Listing;
+import com.redacted.semoresellapp.model.Order;
 import com.redacted.semoresellapp.model.Review;
 import com.redacted.semoresellapp.repository.ListingRepository;
+import com.redacted.semoresellapp.repository.OrderRepository;
 import com.redacted.semoresellapp.repository.ReviewRepository;
 import com.redacted.semoresellapp.exception.ReviewNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ public class ReviewService {
     private ReviewRepository reviewRepository;
 
     @Autowired
-    private ListingRepository listingRepository;
+    private OrderRepository orderRepository;
 
     public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
@@ -46,13 +48,13 @@ public class ReviewService {
         review.setBuyer(updatedReview.getBuyer());
         review.setSeller(updatedReview.getSeller());
 
-        Listing listing = review.getListing();
-        listing.setTitle(updatedReview.getListing().getTitle());
-        listing.setDesc(updatedReview.getListing().getDesc());
-        listing.setImage(updatedReview.getListing().getImage());
-        listing.setPrice(updatedReview.getListing().getPrice());
+        Order order = review.getOrder();
+        order.setPrice(updatedReview.getOrder().getPrice());
+        order.setStatus(updatedReview.getOrder().getStatus());
+        order.setQuantity(updatedReview.getOrder().getQuantity());
+        order.setSeller(updatedReview.getOrder().getSeller());
 
-        listingRepository.save(listing);
+        orderRepository.save(order);
 
         return reviewRepository.save(review);
     }

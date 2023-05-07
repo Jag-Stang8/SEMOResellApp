@@ -26,16 +26,20 @@ public class Listing {
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 
+    @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Order order;
+
 
     //Constructors
     public Listing() {}
 
-    public Listing(String title, String desc, String image, double price, User seller) {
+    public Listing(String title, String desc, String image, double price, User seller, Order order) {
         this.title = title;
         this.desc = desc;
         this.image = image;
         this.price = price;
         this.seller = seller;
+        this.order = order;
     }
 
     //Methods
@@ -78,6 +82,13 @@ public class Listing {
         return this.seller;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     //To-String
 

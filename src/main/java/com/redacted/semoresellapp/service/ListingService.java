@@ -40,6 +40,7 @@ public class ListingService {
         listing.setDesc(updatedListing.getDesc());
         listing.setImage(updatedListing.getImage());
         listing.setPrice(updatedListing.getPrice());
+        listing.setOrder(updatedListing.getOrder());
 
         return listingRepository.save(listing);
     }

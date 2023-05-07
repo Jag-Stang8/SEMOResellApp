@@ -19,8 +19,8 @@ public class Review {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "listing_id", nullable = false)
-    private Listing listing;
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id", nullable = false)
@@ -34,10 +34,10 @@ public class Review {
     //Constructors
     public Review() {}
 
-    public Review(int rating, String content, Listing listing, User buyer, User seller) {
+    public Review(int rating, String content, Order order, User buyer, User seller) {
         this.rating = rating;
         this.content = content;
-        this.listing = listing;
+        this.order = order;
         this.buyer = buyer;
         this.seller = seller;
     }
@@ -68,16 +68,16 @@ public class Review {
         this.content = content;
     }
 
-    public Listing getListing() {
-        return listing;
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public User getUser() {
         return buyer;
-    }
-
-    public void setListing(Listing listing) {
-        this.listing = listing;
     }
 
     public User getBuyer() {
@@ -103,11 +103,11 @@ public class Review {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return rating == review.rating && Objects.equals(id, review.id) && Objects.equals(content, review.content) && Objects.equals(listing, review.listing) && Objects.equals(buyer, review.buyer);
+        return rating == review.rating && Objects.equals(id, review.id) && Objects.equals(content, review.content) && Objects.equals(order, review.order) && Objects.equals(buyer, review.buyer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, rating, content, listing, buyer);
+        return Objects.hash(id, rating, content, order, buyer);
     }
 }
