@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
         <title>Profile</title>
@@ -14,14 +14,7 @@
      <h1>Profile</h1>
 
      <div class="profile">
-        <h1>FirstName LastName</h1>
-        <h2>emailaddress@semo.edu</h2>
-
-        <!-- Listed Items -->
-        <h2>Listed Items</h2>
-
-        <!-- Previous feedback -->
-        <h2>Previous Feedback</h2>
+        <h2 th:text="${username}">emailaddress@semo.edu</h2>
      </div>
 
 </body>

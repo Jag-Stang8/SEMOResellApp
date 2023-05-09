@@ -8,8 +8,8 @@
 </head>
 
 <body>
-<form class="login" method="POST" action="/login">
-    
+<form class="login" th:action="@{/login}" th:method="post">
+
     <div class="title">
         <h1>SEMO Resell</h1>
     </div>
@@ -19,23 +19,23 @@
     </div>
 
     <div class="form-items">
-        <input type="text" id="email" name="email" required placeholder="Email Address">
+        <input type="text" name="username" id="username" required placeholder="Email Address">
     </div>
 
     <div class="form-items">
-        <input type="password" id="password" name="password" required placeholder="Password">
+        <input type="password" name="password" id="password" required placeholder="Password">
     </div>
 
-    <button th:href="@{/homepage}" type="submit">Login</button>
-    
+    <button type="submit">Login</button>
+
     <div class="buttons">
-        <a href="registration.html">Don't Have an Account? Register Here.</a>
+        <a href="/register">Don't Have an Account? Register Here.</a>
     </div>
 
 </form>
 
 <style>
-    
+
 </style>
 </body>
 </html>

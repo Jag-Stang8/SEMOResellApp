@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <form class="registration" method="POST" action="#">
+    <form class="register" th:action="@{/register}" th:method="POST">
     
         <div class="title">
             <h1>SEMO Resell</h1>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form-items">
-            <input type="text" id="email" name="email" required placeholder="Email Address">
+            <input type="text" id="username" name="username" required placeholder="Email Address">
         </div>
 
         <div class="form-items">
@@ -27,10 +27,10 @@
         </div>
 
         <div class="form-items">
-            <input type="password" id="password-confirm" name="password" required placeholder="Confirm Password">
+            <input type="password" name="confirmPassword" id="password-confirm" required placeholder="Confirm Password">
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
     
         <div class="buttons">
             <a href="login.html">Have an Account? Login Here.</a>

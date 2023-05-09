@@ -1,17 +1,13 @@
 package com.redacted.semoresellapp;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-
-import java.util.Arrays;
 
 @SpringBootApplication
 public class SemoResellAppApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SemoResellAppApplication.class, args);
+        ApplicationContext ctx = SpringApplication.run(SemoResellAppApplication.class, args);
     }
 }

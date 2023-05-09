@@ -1,12 +1,10 @@
 package com.redacted.semoresellapp.service;
 
-import com.redacted.semoresellapp.model.Listing;
+import com.redacted.semoresellapp.exception.ReviewNotFoundException;
 import com.redacted.semoresellapp.model.Order;
 import com.redacted.semoresellapp.model.Review;
-import com.redacted.semoresellapp.repository.ListingRepository;
 import com.redacted.semoresellapp.repository.OrderRepository;
 import com.redacted.semoresellapp.repository.ReviewRepository;
-import com.redacted.semoresellapp.exception.ReviewNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

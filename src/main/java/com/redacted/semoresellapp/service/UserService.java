@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -38,6 +39,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public boolean isValidUser(String email, String password) {
+        Optional<User> user = userRepository.findByUsername(email);
+        return user.map(value -> value.getPassword().equals(password)).orElse(false);
+    }
+
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No User with id: " + id + " found"));
     }
@@ -53,16 +59,10 @@ public class UserService {
 
     //Helper methods
     public boolean validateUsername(User user) {
-        if(user.getUsername() == null || user.getUsername().isEmpty())
-            return true;
-
-        return false;
+        return user.getUsername() == null || user.getUsername().isEmpty();
     }
 
     public boolean validatePassword(User user) {
-        if(user.getPassword() == null || user.getPassword().isEmpty())
-            return true;
-
-        return false;
+        return user.getPassword() == null || user.getPassword().isEmpty();
     }
 }

@@ -42,6 +42,14 @@ public class Listing {
         this.order = order;
     }
 
+    public Listing(String title, String desc, String image, double price, User seller) {
+        this.title = title;
+        this.desc = desc;
+        this.image = image;
+        this.price = price;
+        this.seller = seller;
+    }
+
     //Methods
 
 
@@ -88,6 +96,10 @@ public class Listing {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
     }
 
     //To-String

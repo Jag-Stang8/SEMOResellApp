@@ -1,9 +1,9 @@
 package com.redacted.semoresellapp.service;
 
+import com.redacted.semoresellapp.exception.CartNotFoundException;
 import com.redacted.semoresellapp.model.Cart;
 import com.redacted.semoresellapp.model.Listing;
 import com.redacted.semoresellapp.repository.CartRepository;
-import com.redacted.semoresellapp.exception.CartNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

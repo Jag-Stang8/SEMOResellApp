@@ -85,3 +85,5 @@ CREATE TABLE IF NOT EXISTS cart_listing (
     FOREIGN KEY (cart_id) REFERENCES cart_table (id),
     FOREIGN KEY (listing_id) REFERENCES listing_table (id)
 );
+
+INSERT INTO user_table (id, username, password) VALUES (1000, 'testuser', 'testpassword');

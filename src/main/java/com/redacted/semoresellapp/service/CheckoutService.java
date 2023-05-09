@@ -1,10 +1,10 @@
 package com.redacted.semoresellapp.service;
 
+import com.redacted.semoresellapp.exception.CheckoutNotFoundException;
 import com.redacted.semoresellapp.model.Checkout;
 import com.redacted.semoresellapp.model.Order;
 import com.redacted.semoresellapp.model.User;
 import com.redacted.semoresellapp.repository.CheckoutRepository;
-import com.redacted.semoresellapp.exception.CheckoutNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
 package com.redacted.semoresellapp.repository;
 
-import com.redacted.semoresellapp.model.Listing;
 import com.redacted.semoresellapp.model.Order;
 import com.redacted.semoresellapp.model.Review;
 import com.redacted.semoresellapp.model.User;

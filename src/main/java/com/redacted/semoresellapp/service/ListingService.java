@@ -1,8 +1,8 @@
 package com.redacted.semoresellapp.service;
 
+import com.redacted.semoresellapp.exception.ListingNotFoundException;
 import com.redacted.semoresellapp.model.Listing;
 import com.redacted.semoresellapp.repository.ListingRepository;
-import com.redacted.semoresellapp.exception.ListingNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

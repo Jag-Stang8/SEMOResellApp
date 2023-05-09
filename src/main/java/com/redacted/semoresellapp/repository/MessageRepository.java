@@ -1,8 +1,6 @@
 package com.redacted.semoresellapp.repository;
 
-import com.redacted.semoresellapp.model.Listing;
 import com.redacted.semoresellapp.model.Message;
-import com.redacted.semoresellapp.model.Order;
 import com.redacted.semoresellapp.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
